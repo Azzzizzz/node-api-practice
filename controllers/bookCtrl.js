@@ -17,7 +17,7 @@ const post = (req, res) => {
 };
 
 const getById = (req, res) => {
-  let id = +req.params.id;
+  const id = +req.params.id;
 
   let book;
   for (let i = 0; i < books.length; i++) {
@@ -28,8 +28,18 @@ const getById = (req, res) => {
   else res.status(404).send("not found");
 };
 
+const remove = (req, res) => {
+  const id = +req.params.id;
+  for (i = 0; i < books.length; i++) {
+    if (books[i].id === id) {
+      books.splice(i, 1);
+    }
+  }
+  res.status(204).send();
+};
 module.exports = {
   get,
   post,
   getById,
+  remove,
 };

@@ -1,6 +1,10 @@
 // create a new express server
 const express = require("express");
 const app = express();
+const defaultRouter = require("./routes/defaultRouter");
+
+const bookRouter = require("./routes/bookRouter");
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
@@ -8,19 +12,8 @@ app.listen(port, () => {
 });
 
 // route or endpoint
-app.get("/", (req, res) => {
-  res.send("hello express");
-});
-
-app.get("/books", (req, res) => {
-  const books = [
-    { id: 1, name: "Clean Code", price: 100 },
-    { id: 2, name: "DS & Alg", price: 200 },
-    { id: 3, name: "Eloquent JavaScript", price: 120 },
-  ];
-  res.status(200);
-  res.json(books);
-});
+app.use(defaultRouter);
+app.use(bookRouter);
 
 app.get("/authors", (req, res) => {
   res.status(200).send("Authors");

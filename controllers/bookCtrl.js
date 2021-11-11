@@ -16,7 +16,20 @@ const post = (req, res) => {
   res.status(201).send();
 };
 
+const getById = (req, res) => {
+  let id = +req.params.id;
+
+  let book;
+  for (let i = 0; i < books.length; i++) {
+    if (id === books[i].id) book = books[i];
+  }
+
+  if (book) res.status(200).send(book);
+  else res.status(404).send("not found");
+};
+
 module.exports = {
   get,
   post,
+  getById,
 };

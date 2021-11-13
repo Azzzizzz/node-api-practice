@@ -21,9 +21,19 @@ function remove(id) {
   // return Book.deleteOne({_id:id})
 }
 
+function update(id, data) {
+  return Book.updateOne({ _id: id }, {
+    // $set: { name: data.name },
+    // $set: { price: data.price }
+    $set: {name:data.name, price:data.price}
+  })
+  
+}
+
 module.exports = {
   getAll,
   add,
   getById,
-  remove
+  remove,
+  update,
 };

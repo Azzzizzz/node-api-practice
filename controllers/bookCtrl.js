@@ -52,18 +52,24 @@ const remove = async (req, res) => {
   res.status(204).send();
 };
 
-const update = (req, res) => {
-  const id = +req.params.id;
-  const book = req.body;
-
-  for (let i = 0; i < books.length; i++) {
-    if (books[i].id === id) {
-      books[i].name = book.name;
-      books[i].price = book.price;
-    }
-  }
-
+const update = async (req, res) => {
+  try {
+    const id = req.params.id;
+  await bookRepository.update(id, req.body);
   res.status(204).send();
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("Internal server error");
+ }
+
+  
+  // const book = req.body;
+  // for (let i = 0; i < books.length; i++) {
+  //   if (books[i].id === id) {
+  //     books[i].name = book.name;
+  //     books[i].price = book.price;
+  //   }
+  // }
 };
 
 module.exports = {

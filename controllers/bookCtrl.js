@@ -55,14 +55,12 @@ const remove = async (req, res) => {
 const update = async (req, res) => {
   try {
     const id = req.params.id;
-  await bookRepository.update(id, req.body);
-  res.status(204).send();
+    await bookRepository.update(id, req.body);
+    res.status(204).send();
   } catch (e) {
     console.log(e);
     res.status(500).send("Internal server error");
- }
-
-  
+  }
   // const book = req.body;
   // for (let i = 0; i < books.length; i++) {
   //   if (books[i].id === id) {
@@ -72,10 +70,17 @@ const update = async (req, res) => {
   // }
 };
 
+const patch = async (req, res) => {
+  const id = req.params.id;
+  const body = req.body;
+  await bookRepository.patch(id, body);
+  res.status(204).send();
+}
 module.exports = {
   get,
   post,
   getById,
   remove,
   update,
+  patch,
 };

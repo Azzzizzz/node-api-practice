@@ -16,8 +16,14 @@ function getById(id) {
   return Book.findOne({ _id: id }, { __v: 0 });
 }
 
+function remove(id) {
+  return Book.remove({_id:id})
+  // return Book.deleteOne({_id:id})
+}
+
 module.exports = {
   getAll,
   add,
   getById,
+  remove
 };

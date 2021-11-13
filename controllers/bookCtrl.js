@@ -40,13 +40,15 @@ const getById = async (req, res) => {
   // else res.status(404).send("not found");
 };
 
-const remove = (req, res) => {
-  const id = +req.params.id;
-  for (i = 0; i < books.length; i++) {
-    if (books[i].id === id) {
-      books.splice(i, 1);
-    }
-  }
+const remove = async (req, res) => {
+  const id = req.params.id;
+  // TODO: try catch
+  await bookRepository.remove(id);
+  // for (i = 0; i < books.length; i++) {
+  //   if (books[i].id === id) {
+  //     books.splice(i, 1);
+  //   }
+  // }
   res.status(204).send();
 };
 

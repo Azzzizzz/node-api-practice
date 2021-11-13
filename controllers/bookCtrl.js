@@ -22,21 +22,22 @@ const get = async (req, res) => {
 const post = async (req, res) => {
   const book = req.body;
   await bookRepository.add(book);
-
   res.status(201);
   res.send("created");
 };
 
-const getById = (req, res) => {
-  const id = +req.params.id;
-
-  let book;
-  for (let i = 0; i < books.length; i++) {
-    if (id === books[i].id) book = books[i];
-  }
-
-  if (book) res.status(200).send(book);
-  else res.status(404).send("not found");
+const getById = async (req, res) => {
+  const id = req.params.id;
+  const book = await bookRepository.getById(id);
+  res.status(200);
+  res.json(book);
+  // const id = +req.params.id;
+  // let book;
+  // for (let i = 0; i < books.length; i++) {
+  //   if (id === books[i].id) book = books[i];
+  // }
+  // if (book) res.status(200).send(book);
+  // else res.status(404).send("not found");
 };
 
 const remove = (req, res) => {
